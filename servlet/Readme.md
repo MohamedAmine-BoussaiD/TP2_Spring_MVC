@@ -90,7 +90,7 @@ annotation_version/vannotation
 ```java
 @WebServlet(name = "msa" , urlPatterns = {"/hello2" , "/hi"})
 
-public class HelloServlet extends HttpServlet {
+public class MyServlet extends HttpServlet {
     // Implementation
 }
 ```
