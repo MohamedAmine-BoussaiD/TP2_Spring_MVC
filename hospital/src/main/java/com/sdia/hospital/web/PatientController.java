@@ -3,6 +3,8 @@ package com.sdia.hospital.web;
 import com.sdia.hospital.entities.Patient;
 import com.sdia.hospital.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,10 +21,14 @@ public class PatientController {
     private PatientRepository patientRepository;
 
     @GetMapping("/index")
-    public String index(Model model){
-        List<Patient> patientList = patientRepository.findAll();
-        model.addAttribute("patientList",patientList);
-        return "patients"; // return  " model + vue "
+    public String index(Model model ,
+                        @RequestParam(name = "page" , defaultValue = "0") int page ,
+                        @RequestParam(name="size" ,defaultValue = "5") int size) {
+        Page<Patient> pagePatient = patientRepository.findAll(PageRequest.of(page,size));
+        model.addAttribute("patientList", pagePatient.getContent());
+        model.addAttribute("pages", new int[pagePatient.getTotalPages()]);
+        model.addAttribute("currentPage", page);
+        return "patients";
     }
 
    @GetMapping("/deletePatient")
@@ -30,6 +36,17 @@ public class PatientController {
         patientRepository.deleteById(id);
         return "redirect:/index";
    }
+//
+//   @GetMapping("/score")
+//   public String score(Model model ,
+//                       @RequestParam(name="page" , defaultValue = "0") int page ,
+//                       @RequestParam(name="size" , defaultValue = "5") int size
+//   ){
+//        Page<Patient> patientScore = patientRepository.findAllByOrderByScoreAsc(PageRequest.of(page, size));
+//        model.addAttribute("patientList",patientScore.getContent());
+//        return "patients";
+//
+//   }
 
 
    }
