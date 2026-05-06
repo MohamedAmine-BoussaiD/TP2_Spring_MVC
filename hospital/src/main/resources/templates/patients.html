@@ -7,6 +7,14 @@
 </head>
 <body>
 
+<div>
+    <form method="get" th:action="@{/index}">
+        <label > keyword </label>
+        <input type="text" name="keyword" th:value="${keyword}">
+        <button class="btn btn-outline-info">Search</button>
+    </form>
+</div>
+
 <div class="p-3 m-2">
     <div class="card ">
         <div class="card-header">
@@ -32,7 +40,7 @@
                     <td th:text="${p.dateNaissance}"></td>
                     <td th:text="${p.score}"></td>
                     <td th:text="${p.malade}" ></td>
-                    <td> <a class=" btn btn-danger " th:href="@{deletePatient(id=${p.id})}">Delete</a></td>
+                    <td> <a class=" btn btn-danger " th:href="@{deletePatient(id=${p.id},keyword=${keyword} , page=${currentPage})}">Delete</a></td>
                 </tr>
 
                 </tbody>
@@ -43,7 +51,7 @@
 <div>
     <ul class="nav nav-pills">
         <li th:each="page,status :${pages}">
-            <a th:class="${status.index == currentPage ? 'btn btn-info m-1 ': 'btn btn-outline-info m-1'}" class="btn btn-outline-info m-1"  th:href="@{/index(page=${status.index})}" th:text="${status.index}"></a>
+            <a th:class="${status.index == currentPage ? 'btn btn-info m-1 ': 'btn btn-outline-info m-1'}" class="btn btn-outline-info m-1"  th:href="@{/index(page=${status.index},keyword=${keyword})}" th:text="${status.index}"></a>
         </li>
     </ul>
 </div>
