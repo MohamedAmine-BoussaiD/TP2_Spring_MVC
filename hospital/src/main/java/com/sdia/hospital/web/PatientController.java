@@ -7,11 +7,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -41,17 +39,21 @@ public class PatientController {
         patientRepository.deleteById(id);
         return "redirect:/index?page="+page+"&keyword="+keyword;
    }
-//
-//   @GetMapping("/score")
-//   public String score(Model model ,
-//                       @RequestParam(name="page" , defaultValue = "0") int page ,
-//                       @RequestParam(name="size" , defaultValue = "5") int size
-//   ){
-//        Page<Patient> patientScore = patientRepository.findAllByOrderByScoreAsc(PageRequest.of(page, size));
-//        model.addAttribute("patientList",patientScore.getContent());
-//        return "patients";
-//
-//   }
+
+   @GetMapping("/formPatients")
+    public String formPatient(Model model){
+        model.addAttribute("patient", new Patient());
+        return "formPatients";
+   }
+
+   @PostMapping("/savePatients")
+    public String savePatient(Model model,Patient patient){
+        patientRepository.save(patient);
+        return "redirect:/index";
+   }
+
+
+
 
 
    }
