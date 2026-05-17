@@ -186,6 +186,19 @@ Spring Security is configured in `SecurityConfig.java`. The authenticated userna
 
 ![img_4.png](images/img_4.png)
 ---
+## handling authaurization
+![img.png](images/img9.png)
+## login page handling 
+
+```java
+httpSecurity.formLogin
+                   ( form -> form.loginPage("/login")
+                           .defaultSuccessUrl("/index", true)
+                           .permitAll()
+                   );
+```
+![img.png](images/img8.png)
+
 
 ## Patient Entity
 

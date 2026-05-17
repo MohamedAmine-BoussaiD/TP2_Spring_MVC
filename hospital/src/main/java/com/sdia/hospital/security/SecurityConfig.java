@@ -29,18 +29,22 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
-           httpSecurity.formLogin( form -> form
-                   .defaultSuccessUrl("/index")
-
-           );
-            httpSecurity.authorizeHttpRequests(
+           httpSecurity
+           .formLogin
+                   ( form -> form.loginPage("/login")
+                           .defaultSuccessUrl("/index", true)
+                           .permitAll()
+                   )
+           .authorizeHttpRequests
+                   (
                     auth ->
-                            auth.requestMatchers("/savePatients")
+                            auth.requestMatchers(  "/admin/**")
                                 .hasRole("ADMIN")
                                 .anyRequest().authenticated()
-            );
-            httpSecurity.exceptionHandling( auth ->
-                    auth.accessDeniedPage("/access_denied"));
+                    )
+
+           .exceptionHandling( ex ->
+                    ex.accessDeniedPage("/notAuthorized"));
 
 
         return httpSecurity.build();
