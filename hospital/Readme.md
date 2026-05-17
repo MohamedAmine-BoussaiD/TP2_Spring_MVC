@@ -108,7 +108,7 @@ The home page (`/index`) displays a paginated table with columns: **ID, NOM, PRE
 
 Use the numbered page buttons at the bottom to navigate.
 
-![img_3.png](img_3.png)
+![img_3.png](images/img_3.png)
 
 ---
 
@@ -128,7 +128,7 @@ Example URL:
 ```
 http://localhost:8050/index?keyword=amine&page=0
 ```
-![img.png](img.png)
+![img.png](images/img.png)
 
 ---
 
@@ -138,7 +138,7 @@ Click **Patients → Add** in the navbar to open the creation form (`/formPatien
 
 Fill in the fields and submit. If validation fails (via `@Valid`), the form is redisplayed with error messages.
 
-![img_1.png](img_1.png)
+![img_1.png](images/img_1.png)
 ---
 
 ###  Edit a Patient
@@ -147,7 +147,7 @@ Click the **Edit** button on any row. You are redirected to:
 ```
 http://localhost:8050/editPatient?id={id}
 ```
-![img_2.png](img_2.png)
+![img_2.png](images/img_2.png)
 
 
 The form is pre-filled with the patient's current data. Submit to save changes.
@@ -184,7 +184,7 @@ Spring Security is configured in `SecurityConfig.java`. The authenticated userna
 
 > You can configure in-memory users or database-backed authentication inside `SecurityConfig`.
 
-![img_4.png](img_4.png)
+![img_4.png](images/img_4.png)
 ---
 
 ## Patient Entity
