@@ -43,8 +43,10 @@
                         <td th:text="${p.dateNaissance}"></td>
                         <td th:text="${p.score}"></td>
                         <td th:text="${p.malade}" ></td>
-                        <td> <a class=" btn btn-danger " th:href="@{deletePatient(id=${p.id},keyword=${keyword} , page=${currentPage})}">Delete</a></td>
-                        <td> <a class="btn btn-outline-primary" th:href="@{editPatient(id=${p.id})}">Edit</a></td>
+                        <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                            <a class=" btn btn-danger " th:href="@{deletePatient(id=${p.id},keyword=${keyword} , page=${currentPage})}">Delete</a></td>
+                        <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                            <a class="btn btn-outline-primary" th:href="@{editPatient(id=${p.id})}">Edit</a></td>
                     </tr>
 
                     </tbody>

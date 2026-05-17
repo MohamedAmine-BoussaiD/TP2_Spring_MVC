@@ -20,7 +20,7 @@ public class SecurityConfig {
     public InMemoryUserDetailsManager inMemoryUserDetailsManager(PasswordEncoder passwordEncoder) {
         return new InMemoryUserDetailsManager(
                 User.withUsername("admin").password(passwordEncoder.encode("admin")).roles("ADMIN").build(),
-                User.withUsername("amine").password(passwordEncoder.encode("1234")).roles("ADMIN").build(),
+                User.withUsername("amine").password(passwordEncoder.encode("1234")).roles("USER").build(),
                 User.withUsername("guest").password(passwordEncoder.encode("1234")).roles("USER").build()
         );
     }
@@ -34,9 +34,14 @@ public class SecurityConfig {
 
            );
             httpSecurity.authorizeHttpRequests(
-                    auth -> auth
-                            .anyRequest().authenticated()
+                    auth ->
+                            auth.requestMatchers("/savePatients")
+                                .hasRole("ADMIN")
+                                .anyRequest().authenticated()
             );
+            httpSecurity.exceptionHandling( auth ->
+                    auth.accessDeniedPage("/access_denied"));
+
 
         return httpSecurity.build();
     }

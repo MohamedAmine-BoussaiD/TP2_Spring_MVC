@@ -27,9 +27,20 @@
         <ul class="navbar-nav ">
 <!-- apres for user authentified-->
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">UserName</a>
-                <ul class="dropdown-menu">
+                <a class="nav-link dropdown-toggle" href="#" role="button"
+                   data-bs-toggle="dropdown"  th:text="${#authentication.name}"
+                >
 
+
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <form method="post" th:action="@{/logout}">
+                            <button class="dropdown-item" type="submit"> Logout </button>
+                        </form>
+                    </li>
+
+                    <li> <a class="dropdown-item" >  </a></li>
                 </ul>
             </li>
         </ul>
