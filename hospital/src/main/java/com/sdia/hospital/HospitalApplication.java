@@ -6,6 +6,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.service.annotation.PatchExchange;
 
 import java.util.Date;
@@ -18,6 +20,10 @@ public class HospitalApplication {
         SpringApplication.run(HospitalApplication.class, args);
     }
 
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
     // bean pour stocker des dans dooner dans DB lors de demarrage du app
     @Bean
     CommandLineRunner init(PatientRepository patientRepository) {

@@ -12,8 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class PatientController {
@@ -57,6 +56,15 @@ public class PatientController {
         patientRepository.save(patient);
         return "redirect:/index";
    }
+
+   @GetMapping("/editPatient")
+    public String editPatient(Model model  , Long id){
+        Patient patient = patientRepository.findById(id).orElse(null);
+        model.addAttribute("patient",patient);
+        return "editPatients";
+   }
+
+
 
 
 
